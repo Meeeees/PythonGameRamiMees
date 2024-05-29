@@ -7,8 +7,8 @@ import os
 pygame.init()
 
 # Constants for the game
-SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
-GRIDSIZE = 20
+SCREEN_WIDTH, SCREEN_HEIGHT = 665, 525
+GRIDSIZE = 35
 GRID_WIDTH = SCREEN_WIDTH // GRIDSIZE
 GRID_HEIGHT = SCREEN_HEIGHT // GRIDSIZE
 
@@ -22,7 +22,8 @@ WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
-
+DARK_GREEN = (162, 208, 74)
+LIGHT_GREEN = (169, 215, 81)
 # Font setup
 font = pygame.font.Font(None, 36)
 
@@ -30,7 +31,11 @@ def draw_grid():
     for x in range(0, SCREEN_WIDTH, GRIDSIZE):
         for y in range(0, SCREEN_HEIGHT, GRIDSIZE):
             rect = pygame.Rect(x, y, GRIDSIZE, GRIDSIZE)
-            pygame.draw.rect(screen, WHITE, rect, 1)
+            if (x // GRIDSIZE + y // GRIDSIZE) % 2 == 0:
+                pygame.draw.rect(screen, DARK_GREEN, rect)
+            else:
+                pygame.draw.rect(screen, LIGHT_GREEN, rect)
+
 
 def move(snake):
     head_x, head_y = snake[0]
