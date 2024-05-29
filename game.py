@@ -25,8 +25,11 @@ snake_direction = 'RIGHT'
 change_to = snake_direction
 
 # Food settings
-food_pos = [random.randrange(1, (screen_width // cell_size)) * cell_size,
-            random.randrange(1, (screen_height // cell_size)) * cell_size]
+def random_food_position():
+    return [random.randrange(0, screen_width // cell_size) * cell_size,
+            random.randrange(0, screen_height // cell_size) * cell_size]
+
+food_pos = random_food_position()
 food_spawn = True
 
 # Game settings
@@ -85,14 +88,13 @@ while True:
 
     # Snake body growing mechanism
     snake_body.insert(0, list(snake_pos))
-    if snake_pos[0] == food_pos[0] and snake_pos[1] == food_pos[1]:
+    if snake_pos == food_pos:
         food_spawn = False
     else:
         snake_body.pop()
 
     if not food_spawn:
-        food_pos = [random.randrange(1, (screen_width // cell_size)) * cell_size,
-                    random.randrange(1, (screen_height // cell_size)) * cell_size]
+        food_pos = random_food_position()
     food_spawn = True
 
     # Fill screen and draw snake and food
@@ -109,7 +111,7 @@ while True:
         game_over()
 
     for block in snake_body[1:]:
-        if snake_pos[0] == block[0] and snake_pos[1] == block[1]:
+        if snake_pos == block:
             game_over()
 
     # Display score
