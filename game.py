@@ -142,6 +142,7 @@ while running:
             pygame.quit()
             sys.exit()
         elif choice == 'RETRY':
+            write_score(username, score)
             snake = [(GRID_WIDTH // 2, GRID_HEIGHT // 2)]
             direction = 'UP'
             food = get_random_food(snake)
@@ -152,7 +153,6 @@ while running:
         score += 1
 
     screen.fill(BLACK)
-    draw_grid()
     for x, y in snake:
         snake_rect = pygame.Rect(x * GRIDSIZE, y * GRIDSIZE, GRIDSIZE, GRIDSIZE)
         pygame.draw.rect(screen, GREEN, snake_rect)
